@@ -5,9 +5,9 @@ const options = {
     "X-RapidAPI-Host": "shazam.p.rapidapi.com",
   },
 };
-export function getDiscovers() {
-  fetch("https://shazam.p.rapidapi.com/charts/track", options)
-    .then((response) => response.json())
-    .then((response) => console.log(response))
-    .catch((err) => console.error(err));
+export async function getDiscovers() {
+  let res = await fetch("https://shazam.p.rapidapi.com/charts/track", options);
+  let data = await res.json();
+  console.log(data);
+  return data;
 }
