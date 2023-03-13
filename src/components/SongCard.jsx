@@ -13,7 +13,7 @@ const SongCard = ({ track }) => {
     }
   };
   return (
-    <div className="group flex flex-col w-[250px] gap-1 p-4 bg-white/5 bg-opacity-80 backdrop-blur-sm animate-slideup rounded-lg cursor-pointer">
+    <div className="group flex flex-col w-[220px] gap-1 p-4 bg-white/5 bg-opacity-80 backdrop-blur-sm animate-slideup rounded-lg cursor-pointer">
       <div className="relative h-56 rounded-lg" onClick={playPauseHandler}>
         <img
           src={track?.images?.coverart}
@@ -28,7 +28,7 @@ const SongCard = ({ track }) => {
           }`}
         >
           {activeSong?.title == track?.title && (
-            <PlayPause isPlaying={isPlaying} />
+            <PlayPause isPlaying={isPlaying} useForTopCharts={false} />
           )}
         </div>
       </div>
