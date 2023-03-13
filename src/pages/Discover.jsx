@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getDiscovers } from "../apis";
-import { SongCard } from "./../components";
+import { SongCard, Loader } from "./../components";
 
 const Discover = () => {
   let [traks, setTracks] = useState([]);
@@ -12,6 +12,7 @@ const Discover = () => {
       setTracks(res.tracks);
     });
   }, []);
+  if (loading) return <Loader />;
   return (
     <div className="flex flex-wrap justify-center xl:justify-start gap-3">
       {traks.map((track) => (

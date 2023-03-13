@@ -2,9 +2,7 @@ import PlayPause from "./PlayPause";
 import { useSelector, useDispatch } from "react-redux";
 import { playPause } from "./../store/slices/musicPlayer";
 const SongCard = ({ track }) => {
-  let { isPlaying, isActive, activeSong } = useSelector(
-    (state) => state.musicPlayer
-  );
+  let { isPlaying, activeSong } = useSelector((state) => state.musicPlayer);
   let dispatch = useDispatch();
   const playPauseHandler = () => {
     if (!isPlaying || track?.title != activeSong?.title) {
