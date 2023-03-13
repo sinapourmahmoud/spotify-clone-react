@@ -1,5 +1,7 @@
 import "./App.css";
 import { Searchbar, TopPlay } from "./components";
+import { useSelector } from "react-redux";
+
 import {
   Discover,
   TopArtists,
@@ -12,6 +14,7 @@ import {
 import { Route, Routes } from "react-router-dom";
 import MusicPlayer from "./components/MusicPlayer";
 function App() {
+  let { isActive } = useSelector((state) => state.musicPlayer);
   return (
     <div className="flex relative">
       <Searchbar />
@@ -34,10 +37,11 @@ function App() {
           </div>
         </div>
       </div>
-
-      <div className="absolute h-28 bottom-0 left-0 right-0 flex animate-slideup bg-gradient-to-br from-white/10 to-[#2a2a80] backdrop-blur-lg rounded-t-3xl z-10">
-        <MusicPlayer />
-      </div>
+      {isActive && (
+        <div className="absolute h-28 bottom-0 left-0 right-0 flex animate-slideup bg-gradient-to-br from-white/10 to-[#2a2a80] backdrop-blur-lg rounded-t-3xl z-10">
+          <MusicPlayer />
+        </div>
+      )}
     </div>
   );
 }
