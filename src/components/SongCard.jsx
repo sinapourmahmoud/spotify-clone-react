@@ -1,6 +1,7 @@
 import PlayPause from "./PlayPause";
 import { useSelector, useDispatch } from "react-redux";
 import { playPause } from "./../store/slices/musicPlayer";
+import { Link } from "react-router-dom";
 const SongCard = ({ track }) => {
   let { isPlaying, activeSong } = useSelector((state) => state.musicPlayer);
   let dispatch = useDispatch();
@@ -12,7 +13,7 @@ const SongCard = ({ track }) => {
     }
   };
   return (
-    <div className="group flex flex-col w-[250px] p-4 bg-white/5 bg-opacity-80 backdrop-blur-sm animate-slideup rounded-lg cursor-pointer">
+    <div className="group flex flex-col w-[250px] gap-1 p-4 bg-white/5 bg-opacity-80 backdrop-blur-sm animate-slideup rounded-lg cursor-pointer">
       <div className="relative h-56 rounded-lg" onClick={playPauseHandler}>
         <img
           src={track?.images?.coverart}
@@ -30,6 +31,22 @@ const SongCard = ({ track }) => {
             <PlayPause isPlaying={isPlaying} />
           )}
         </div>
+      </div>
+      <div className="flex flex-col gap-1">
+        <p className="font-semibold text-lg text-white truncate">
+          <Link to={`/songs/${track?.key}`}>{track.title}</Link>
+        </p>
+        <p className="text-sm truncate text-gray-300 mt-1">
+          <Link
+            to={
+              track?.artists
+                ? `/artists/${track?.artists[0]?.adamid}`
+                : "/top-artists"
+            }
+          >
+            {track?.subtitle}
+          </Link>
+        </p>
       </div>
     </div>
   );
