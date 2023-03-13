@@ -21,7 +21,7 @@ const Sidebar = () => {
               <NavLink
                 to={item.to}
                 className={({ isActive }) => {
-                  return `flex items-center justify-start gap-5 group text-xl font-bold ${
+                  return `flex items-center justify-start gap-5 group text-lg font-semibold ${
                     isActive ? "text-cyan-400" : "text-gray-400"
                   }`;
                 }}
