@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getDiscovers } from "../apis";
 import { SongCard } from "./../components";
+
 const Discover = () => {
   let [traks, setTracks] = useState([]);
   let [loading, setLoading] = useState(false);

@@ -7,7 +7,7 @@ const PlayPause = ({ isPlaying }) => {
       {isPlaying ? (
         <FaPauseCircle fontSize={30} color={"white"} />
       ) : (
-        <FaPauseCircle fontSize={30} color={"white"} />
+        <FaPlayCircle fontSize={30} color={"white"} />
       )}
     </>
   );
