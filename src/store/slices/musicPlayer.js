@@ -4,7 +4,7 @@ const initialState = {
   isPlaying: false,
   isActive: false,
   activeSong: null,
-  songs: [],
+  songs: JSON.parse(localStorage.getItem("songs")) || [],
   currentIndex: null,
 };
 
@@ -23,6 +23,7 @@ export const musicPlayer = createSlice({
       action.payload.forEach((item, index) => {
         state.songs.push({ ...item, itemIndex: index });
       });
+      localStorage.setItem("songs", JSON.stringify(state.songs));
     },
     nextSong: (state, action) => {
       if (state.songs[action.payload]) {

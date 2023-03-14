@@ -5,9 +5,10 @@ import { RelatedSongs } from "./index";
 import { FreeMode } from "swiper";
 import "swiper/css";
 import "swiper/css/free-mode";
-import { useEffect, useRef } from "react";
-
+import { useEffect, useRef, useState } from "react";
+import { getDiscovers } from "./../apis";
 const TopPlay = () => {
+  let [tracks, setTracks] = useState([]);
   let divRef = useRef(null);
   let { songs, isPlaying, activeSong } = useSelector(
     (state) => state.musicPlayer
@@ -16,11 +17,28 @@ const TopPlay = () => {
   useEffect(() => {
     divRef.current.scrollIntoView({ behavior: "smooth" });
   });
+  useEffect(() => {
+    getDiscovers()
+      .then((res) => {
+        let resItems = [];
+        res?.tracks.map((item, index) => {
+          resItems.push({
+            ...item,
+            itemIndex: index,
+          });
+        });
+        setTracks(resItems);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <div
       ref={divRef}
       className="xl:ml-6 ml-0 xl:mb-0 mb-6 flex-1 xl:max-w-[500px] max-w-full flex flex-col pt-10 xl:pt-0"
     >
+      {" "}
       <div className="flex flex-col gap-1 w-full">
         <div className="flex items-center justify-between">
           <p className="text-white font-bold text-xl">Top Charts</p>
@@ -29,7 +47,7 @@ const TopPlay = () => {
           </Link>
         </div>
         <div className="flex flex-col gap-1 w-full ">
-          {songs.slice(0, 5).map((track, index) => (
+          {tracks.slice(0, 5).map((track, index) => (
             <RelatedSongs
               key={track.itemIndex}
               isPlaying={isPlaying}
