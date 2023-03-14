@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper";
 import "swiper/css";
 import "swiper/css/free-mode";
+import { useEffect, useRef } from "react";
 const TopPLays = ({ track, i, dispatch, isPlaying, activeSong }) => {
   return (
     <div className="w-full flex flex-row items-center gap-16 hover:bg-[#4c426e] py-2 p-4 rounded-lg cursor-pointer mb-2">
@@ -58,12 +59,19 @@ const TopPLays = ({ track, i, dispatch, isPlaying, activeSong }) => {
 };
 
 const TopPlay = () => {
+  let divRef = useRef(null);
   let { songs, isPlaying, activeSong } = useSelector(
     (state) => state.musicPlayer
   );
   let dispatch = useDispatch();
+  useEffect(() => {
+    divRef.current.scrollIntoView({ behavior: "smooth" });
+  });
   return (
-    <div className="xl:ml-6 ml-0 xl:mb-0 mb-6 flex-1 xl:max-w-[500px] max-w-full flex flex-col mt-10 xl:mt-0">
+    <div
+      ref={divRef}
+      className="xl:ml-6 ml-0 xl:mb-0 mb-6 flex-1 xl:max-w-[500px] max-w-full flex flex-col pt-10 xl:pt-0"
+    >
       <div className="flex flex-col gap-1 w-full">
         <div className="flex items-center justify-between">
           <p className="text-white font-bold text-xl">Top Charts</p>
