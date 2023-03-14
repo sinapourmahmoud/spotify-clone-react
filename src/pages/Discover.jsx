@@ -12,6 +12,7 @@ const Discover = () => {
   useEffect(() => {
     setLoading(true);
     getDiscovers().then((res) => {
+      console.log(res.tracks);
       setLoading(false);
       dispatch(initialSongs(res.tracks));
       setTracks(songs);

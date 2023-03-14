@@ -7,7 +7,13 @@ const initialState = {
   songs: JSON.parse(localStorage.getItem("songs")) || [],
   currentIndex: null,
 };
-
+function selecSong(state, x) {
+  state.activeSong.song = state.songs[x].hub?.actions[1]?.uri;
+  state.activeSong.image = state.songs[x].images?.coverart;
+  state.activeSong.title = state.songs[x].title;
+  state.activeSong.subtitle = state.songs[x].subtitle;
+  state.activeSong.itemIndex = state.songs[x].itemIndex;
+}
 export const musicPlayer = createSlice({
   name: "musicPlayer",
   initialState,
@@ -15,37 +21,41 @@ export const musicPlayer = createSlice({
     playPause: (state, action) => {
       state.isPlaying = action.payload.isPlaying;
       state.isActive = true;
-      state.activeSong = action.payload.song;
-      state.currentIndex = action.payload.song.itemIndex;
+      state.activeSong = {};
+      state.activeSong.song = action.payload.song?.hub?.actions[1]?.uri;
+      state.activeSong.image = action.payload.song?.images?.coverart;
+      state.activeSong.title = action.payload.song?.title;
+      state.activeSong.subtitle = action.payload.song?.subtitle;
+      state.activeSong.itemIndex = action.payload.song?.itemIndex;
+      state.currentIndex = action.payload.song?.itemIndex;
     },
     initialSongs: (state, action) => {
       state.songs = [];
-      action.payload.forEach((item, index) => {
+      action.payload?.map((item, index) => {
         state.songs.push({ ...item, itemIndex: index });
       });
       localStorage.setItem("songs", JSON.stringify(state.songs));
     },
     nextSong: (state, action) => {
       if (state.songs[action.payload]) {
-        state.activeSong = state.songs[action.payload];
+        selecSong(state, action.payload);
       } else {
-        state.activeSong = state.songs[0];
+        selecSong(state, 0);
       }
       state.currentIndex = state.activeSong.itemIndex;
       state.isPlaying = true;
     },
     prevSong: (state, action) => {
       if (state.songs[action.payload]) {
-        state.activeSong = state.songs[action.payload];
+        selecSong(state, action.payload);
       } else {
-        state.activeSong = state.songs[state.songs.length - 1];
+        selecSong(state, state.songs.length - 1);
       }
       state.currentIndex = state.activeSong.itemIndex;
       state.isPlaying = true;
     },
     shuffle: (state, action) => {
-      state.activeSong =
-        state.songs[Math.floor(Math.random() * state.songs.length)];
+      selecSong(state, Math.floor(Math.random() * state.songs.length));
       state.currentIndex = state.activeSong?.itemIndex;
       state.isPlaying = true;
     },

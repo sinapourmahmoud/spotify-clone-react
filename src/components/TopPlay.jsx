@@ -21,7 +21,7 @@ const TopPlay = () => {
     getDiscovers()
       .then((res) => {
         let resItems = [];
-        res?.tracks.map((item, index) => {
+        res?.tracks?.map((item, index) => {
           resItems.push({
             ...item,
             itemIndex: index,

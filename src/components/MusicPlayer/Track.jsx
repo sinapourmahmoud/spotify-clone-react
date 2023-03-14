@@ -9,7 +9,7 @@ const Track = ({ isPlaying, isActive, activeSong }) => {
         }`}
       >
         <img
-          src={activeSong?.images?.coverart}
+          src={activeSong?.image}
           alt="track-img"
           className="w-full h-full rounded-full"
         />

@@ -19,14 +19,13 @@ const ArtistDetails = () => {
       .then((doc) => {
         setTopSongs(doc.data);
         let relatedList = [];
-        doc.data.map((item, index) => {
+        doc?.data?.map((item, index) => {
           relatedList.push({
             ...item,
             itemIndex: index,
           });
         });
         setTopSongs(relatedList);
-        console.log(doc.data);
       })
       .catch((err) => {
         console.log(err);

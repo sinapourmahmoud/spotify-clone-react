@@ -35,7 +35,7 @@ const Player = ({
 
   return (
     <audio
-      src={activeSong?.hub?.actions[1]?.uri}
+      src={activeSong?.song}
       onLoadedData={onLoadHandler}
       ref={ref}
       onTimeUpdate={changeCurrentTime}
