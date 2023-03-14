@@ -8,12 +8,27 @@ const options = {
 export async function getDiscovers() {
   let res = await fetch("https://shazam.p.rapidapi.com/charts/track", options);
   let data = await res.json();
-  console.log(data);
   return data;
 }
 export async function getSongDetails(id) {
   let res = await fetch(
     `https://shazam.p.rapidapi.com/songs/get-details?key=${id}`,
+    options
+  );
+  let data = await res.json();
+  return data;
+}
+export async function getArtistDetails(id) {
+  let res = await fetch(
+    `https://shazam.p.rapidapi.com/artists/get-details?id=${id}`,
+    options
+  );
+  let data = await res.json();
+  return data;
+}
+export async function getArtistTopSong(id) {
+  let res = await fetch(
+    `https://shazam.p.rapidapi.com/artists/get-top-songs?id=${id}`,
     options
   );
   let data = await res.json();
