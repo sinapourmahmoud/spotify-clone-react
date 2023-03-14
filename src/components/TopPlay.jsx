@@ -1,62 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
-import { playPause } from "./../store/slices/musicPlayer";
-import { FaPauseCircle, FaPlayCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { RelatedSongs } from "./index";
 import { FreeMode } from "swiper";
 import "swiper/css";
 import "swiper/css/free-mode";
 import { useEffect, useRef } from "react";
-const TopPLays = ({ track, i, dispatch, isPlaying, activeSong }) => {
-  return (
-    <div className="w-full flex flex-row items-center gap-16 hover:bg-[#4c426e] py-2 p-4 rounded-lg cursor-pointer mb-2">
-      <div className="flex-1 flex items-center gap-2">
-        <p className="text-white">{i + 1}.</p>
-        <img
-          src={track?.images?.coverart}
-          className="w-12 h-12 rounded-lg"
-          alt="top-charts"
-        />
-        <div className="flex-1 flex flex-col gap-1">
-          <Link
-            className="text-white text-xl font-bold"
-            to={`/songs/${track?.key}`}
-          >
-            {track?.title}
-          </Link>
-
-          <Link
-            className="text-sm text-[#eee]"
-            to={
-              track?.artists
-                ? `/artists/${track?.artists[0]?.adamid}`
-                : "/top-artists"
-            }
-          >
-            {track?.artists[0].alias}
-          </Link>
-        </div>
-      </div>
-      {isPlaying == true && track?.title == activeSong?.title ? (
-        <FaPauseCircle
-          fontSize={25}
-          color="white"
-          onClick={() => {
-            dispatch(playPause({ song: track, isPlaying: false }));
-          }}
-        />
-      ) : (
-        <FaPlayCircle
-          fontSize={25}
-          color="white"
-          onClick={() => {
-            dispatch(playPause({ song: track, isPlaying: true }));
-          }}
-        />
-      )}
-    </div>
-  );
-};
 
 const TopPlay = () => {
   let divRef = useRef(null);
@@ -81,7 +30,7 @@ const TopPlay = () => {
         </div>
         <div className="flex flex-col gap-1 w-full ">
           {songs.slice(0, 5).map((track, index) => (
-            <TopPLays
+            <RelatedSongs
               key={track.itemIndex}
               isPlaying={isPlaying}
               track={track}
