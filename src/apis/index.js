@@ -11,3 +11,11 @@ export async function getDiscovers() {
   console.log(data);
   return data;
 }
+export async function getSongDetails(id) {
+  let res = await fetch(
+    `https://shazam.p.rapidapi.com/songs/get-details?key=${id}`,
+    options
+  );
+  let data = await res.json();
+  return data;
+}
