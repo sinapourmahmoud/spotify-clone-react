@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getSongDetails } from "./../apis/index";
-import { DetailsHeader } from "../components";
+import { DetailsHeader, Loader } from "../components";
 const SongDetails = () => {
   let [songDetail, setSongDetail] = useState(null);
+  let [loading, setLoading] = useState(false);
   let { songid } = useParams();
   useEffect(() => {
+    setLoading(true);
     getSongDetails(songid)
       .then((res) => {
+        setLoading(false);
         console.log(res);
         setSongDetail(res);
       })
@@ -15,6 +18,7 @@ const SongDetails = () => {
         console.log(err);
       });
   }, [songid]);
+  if (loading) return <Loader />;
   return (
     <div className="flex flex-col gap-3">
       <DetailsHeader
