@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { ArtistCard, SongCard } from "../components";
+import { ArtistCard, SongCard, Loader } from "../components";
 import { getSearchItems } from "./../apis";
 import { initialSongs } from "../store/slices/musicPlayer";
 const Search = () => {
@@ -44,6 +44,8 @@ const Search = () => {
   const addingToInitialSongs = () => {
     dispatch(initialSongs(searchInfo?.tracks));
   };
+  if (searchInfo?.tracks.length == 0 && searchInfo?.artists.length == 0)
+    return <p className="text-white text-3xl font-bold">Not Resaults</p>;
   return (
     <div className="flex flex-col gap-4">
       <p className="text-3xl text-white font-bold">Tracks</p>
