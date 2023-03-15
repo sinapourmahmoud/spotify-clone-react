@@ -34,3 +34,16 @@ export async function getArtistTopSong(id) {
   let data = await res.json();
   return data;
 }
+export async function getSearchItems(search) {
+  let serachArray = search.split(" ");
+  try {
+    let res = await fetch(
+      `https://shazam.p.rapidapi.com/search?term=${serachArray.join("%20")}`,
+      options
+    );
+    let data = await res.json();
+    return data;
+  } catch (err) {
+    console.log(err.message);
+  }
+}

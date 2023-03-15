@@ -17,9 +17,7 @@ const Discover = () => {
     });
   }, []);
   const addingToInitialSongs = () => {
-    if (songs.length == 0) {
-      dispatch(initialSongs(tracks));
-    }
+    dispatch(initialSongs(tracks));
   };
   if (loading) return <Loader />;
   return (

@@ -19,7 +19,6 @@ export const musicPlayer = createSlice({
   initialState,
   reducers: {
     playPause: (state, action) => {
-      state.isPlaying = action.payload.isPlaying;
       state.isActive = true;
       state.activeSong = {};
       state.activeSong.song = action.payload.song?.hub?.actions[1]?.uri;
@@ -28,6 +27,7 @@ export const musicPlayer = createSlice({
       state.activeSong.subtitle = action.payload.song?.subtitle;
       state.activeSong.itemIndex = action.payload.song?.itemIndex;
       state.currentIndex = action.payload.song?.itemIndex;
+      state.isPlaying = action.payload.isPlaying;
     },
 
     initialSongs: (state, action) => {

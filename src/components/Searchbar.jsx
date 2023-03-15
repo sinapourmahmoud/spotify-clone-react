@@ -8,6 +8,8 @@ const Searchbar = () => {
     e.preventDefault();
     if (search != "" || search != null) {
       navigate(`/search/${search}`);
+    } else {
+      navigate("/");
     }
   };
   return (

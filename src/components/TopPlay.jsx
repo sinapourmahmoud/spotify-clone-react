@@ -35,9 +35,7 @@ const TopPlay = () => {
       });
   }, []);
   const doReset = () => {
-    if (songs.length == 0) {
-      dispatch(initialSongs(tracks.slice(0, 5)));
-    }
+    dispatch(initialSongs(tracks.slice(0, 5)));
   };
 
   return (
