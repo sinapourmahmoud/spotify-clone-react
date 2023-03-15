@@ -1,13 +1,13 @@
 import { FaPauseCircle, FaPlayCircle } from "react-icons/fa";
-import { playPause } from "./../store/slices/musicPlayer";
 import { Link } from "react-router-dom";
 const RelatedSongs = ({
   track,
   i,
-  dispatch,
   isPlaying,
   activeSong,
   fromArtistComponent,
+  playSong,
+  pauseSong,
 }) => {
   return (
     <div className="w-full flex flex-row items-center justify-between gap-16 hover:bg-[#4c426e] py-2 p-4 rounded-lg cursor-pointer mb-2">
@@ -50,23 +50,12 @@ const RelatedSongs = ({
           )}
         </div>
       </div>
-      {isPlaying == true && track?.title == activeSong?.title ? (
-        <FaPauseCircle
-          fontSize={25}
-          color="white"
-          onClick={() => {
-            dispatch(playPause({ song: track, isPlaying: false }));
-          }}
-        />
-      ) : (
-        <FaPlayCircle
-          fontSize={25}
-          color="white"
-          onClick={() => {
-            dispatch(playPause({ song: track, isPlaying: true }));
-          }}
-        />
-      )}
+      {!fromArtistComponent &&
+        (isPlaying == true && track?.title == activeSong?.title ? (
+          <FaPauseCircle fontSize={25} color="white" onClick={pauseSong} />
+        ) : (
+          <FaPlayCircle fontSize={25} color="white" onClick={playSong} />
+        ))}
     </div>
   );
 };

@@ -7,17 +7,20 @@ import { genres } from "../assets/constants";
 const Discover = () => {
   let { songs } = useSelector((state) => state.musicPlayer);
   let dispatch = useDispatch();
-  let [traks, setTracks] = useState([]);
+  let [tracks, setTracks] = useState([]);
   let [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
     getDiscovers().then((res) => {
-      console.log(res.tracks);
       setLoading(false);
-      dispatch(initialSongs(res.tracks));
-      setTracks(songs);
+      setTracks(res.tracks);
     });
   }, []);
+  const addingToInitialSongs = () => {
+    if (songs.length == 0) {
+      dispatch(initialSongs(tracks));
+    }
+  };
   if (loading) return <Loader />;
   return (
     <div className="flex flex-col gap-4">
@@ -32,8 +35,12 @@ const Discover = () => {
         </select>
       </div>
       <div className="flex flex-wrap justify-center xl:justify-start gap-3">
-        {songs.map((track) => (
-          <SongCard track={track} key={track.key} />
+        {tracks.map((track) => (
+          <SongCard
+            track={track}
+            key={track.key}
+            addingToInitialSongs={addingToInitialSongs}
+          />
         ))}
       </div>
     </div>

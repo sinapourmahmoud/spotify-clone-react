@@ -29,6 +29,7 @@ export const musicPlayer = createSlice({
       state.activeSong.itemIndex = action.payload.song?.itemIndex;
       state.currentIndex = action.payload.song?.itemIndex;
     },
+
     initialSongs: (state, action) => {
       state.songs = [];
       action.payload?.map((item, index) => {
@@ -62,7 +63,13 @@ export const musicPlayer = createSlice({
   },
 });
 
-export const { playPause, initialSongs, prevSong, nextSong, shuffle } =
-  musicPlayer.actions;
+export const {
+  playPause,
+  initialSongs,
+  prevSong,
+  nextSong,
+  shuffle,
+  playPauseForRelateds,
+} = musicPlayer.actions;
 
 export default musicPlayer.reducer;

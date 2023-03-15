@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import { useEffect, useRef, useState } from "react";
 import { getDiscovers } from "./../apis";
+import { initialSongs, playPause } from "../store/slices/musicPlayer";
 const TopPlay = () => {
   let [tracks, setTracks] = useState([]);
   let divRef = useRef(null);
@@ -33,6 +34,12 @@ const TopPlay = () => {
         console.log(err);
       });
   }, []);
+  const doReset = () => {
+    if (songs.length == 0) {
+      dispatch(initialSongs(tracks.slice(0, 5)));
+    }
+  };
+
   return (
     <div
       ref={divRef}
@@ -55,6 +62,7 @@ const TopPlay = () => {
               activeSong={activeSong}
               i={index}
               dispatch={dispatch}
+              doReset={doReset}
             />
           ))}
         </div>

@@ -3,8 +3,11 @@ import { useParams } from "react-router-dom";
 import { getArtistDetails, getArtistTopSong } from "./../apis";
 import { DetailsHeader, RelatedSongs } from "../components";
 import { useDispatch, useSelector } from "react-redux";
+
 const ArtistDetails = () => {
-  let { activeSong, isPlaying } = useSelector((state) => state.musicPlayer);
+  let { activeSong, isPlaying, songs } = useSelector(
+    (state) => state.musicPlayer
+  );
   let dispatch = useDispatch();
   let [artist, setArtist] = useState({});
   let [topSongs, setTopSongs] = useState([]);
@@ -26,11 +29,13 @@ const ArtistDetails = () => {
           });
         });
         setTopSongs(relatedList);
+        console.log(doc?.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, [id]);
+
   return (
     <div className="flex flex-col gap-3">
       <DetailsHeader
