@@ -2,7 +2,7 @@ import "./App.css";
 import { Searchbar, Sidebar, TopPlay } from "./components";
 import { useSelector } from "react-redux";
 
-import { Discover, ArtistDetails, SongDetails, Search } from "./pages";
+import { Discover, ArtistDetails, SongDetails, Search, Page404 } from "./pages";
 import { Route, Routes } from "react-router-dom";
 import MusicPlayer from "./components/MusicPlayer";
 function App() {
@@ -21,6 +21,7 @@ function App() {
               <Route path="/artists/:id" element={<ArtistDetails />} />
               <Route path="/songs/:songid" element={<SongDetails />} />
               <Route path="/search/:searchTerm" element={<Search />} />
+              <Route path="*" element={<Page404 />} />
             </Routes>
           </div>
           <div className="xl:sticky relative top-0 h-fit">
