@@ -6,6 +6,7 @@ const initialState = {
   activeSong: null,
   songs: JSON.parse(localStorage.getItem("songs")) || [],
   currentIndex: null,
+  currentTrack: null,
 };
 function selecSong(state, x) {
   state.activeSong.song = state.songs[x].hub?.actions[1]?.uri;
@@ -60,6 +61,9 @@ export const musicPlayer = createSlice({
       state.currentIndex = state.activeSong?.itemIndex;
       state.isPlaying = true;
     },
+    addTrack: (state, action) => {
+      state.currentTrack = action.payload;
+    },
   },
 });
 
@@ -70,6 +74,7 @@ export const {
   nextSong,
   shuffle,
   playPauseForRelateds,
+  addTrack,
 } = musicPlayer.actions;
 
 export default musicPlayer.reducer;

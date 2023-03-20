@@ -27,11 +27,7 @@ const RelatedSongs = ({
         <div className="flex-1 flex flex-col gap-1">
           <Link
             className="text-white text-xl font-bold"
-            to={
-              fromArtistComponent
-                ? `/songs/${track?.id}`
-                : `/songs/${track?.key}`
-            }
+            to={!fromArtistComponent && `/songs/${track?.key}`}
           >
             {fromArtistComponent ? track?.attributes.name : track?.title}
           </Link>

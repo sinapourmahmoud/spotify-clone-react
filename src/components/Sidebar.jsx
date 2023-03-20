@@ -41,7 +41,7 @@ const Sidebar = () => {
       >
         <img src={sinaLogo} alt="logo" className="w-full h-14 object-contain" />
         <div className="mt-10">
-          {links.map((item) => (
+          {links.slice(0, 1).map((item) => (
             <NavLink
               key={item.name}
               to={item.to}

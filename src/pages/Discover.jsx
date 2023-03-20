@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { getDiscovers } from "../apis";
 import { SongCard, Loader } from "./../components";
 import { initialSongs } from "./../store/slices/musicPlayer";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { genres } from "../assets/constants";
 const Discover = () => {
-  let { songs } = useSelector((state) => state.musicPlayer);
   let dispatch = useDispatch();
   let [tracks, setTracks] = useState([]);
   let [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
+    //api file
     getDiscovers().then((res) => {
       setLoading(false);
       setTracks(res.tracks);

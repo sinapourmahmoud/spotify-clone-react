@@ -52,15 +52,19 @@ const TopPlay = () => {
           </Link>
         </div>
         <div className="flex flex-col gap-1 w-full ">
-          {tracks.slice(0, 5).map((track, index) => (
+          {tracks?.slice(0, 5).map((track, index) => (
             <RelatedSongs
               key={track.itemIndex}
               isPlaying={isPlaying}
               track={track}
               activeSong={activeSong}
               i={index}
-              dispatch={dispatch}
-              doReset={doReset}
+              playSong={() =>
+                dispatch(playPause({ song: track, isPlaying: true }))
+              }
+              pauseSong={() =>
+                dispatch(playPause({ song: track, isPlaying: false }))
+              }
             />
           ))}
         </div>

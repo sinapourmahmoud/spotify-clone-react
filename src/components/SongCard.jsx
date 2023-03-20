@@ -6,6 +6,7 @@ const SongCard = ({ track, addingToInitialSongs }) => {
   let { isPlaying, activeSong } = useSelector((state) => state.musicPlayer);
   let dispatch = useDispatch();
   const playPauseHandler = () => {
+    console.log(track);
     addingToInitialSongs();
     if (
       !isPlaying ||

@@ -1,5 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { playPause, nextSong, prevSong,shuffle } from "../../store/slices/musicPlayer";
+import React, { useState } from "react";
+import {
+  playPause,
+  nextSong,
+  prevSong,
+  shuffle,
+} from "../../store/slices/musicPlayer";
 import Controls from "./Controls";
 import Player from "./Player";
 import Seekbar from "./Seekbar";
@@ -14,12 +19,12 @@ const MusicPlayer = () => {
 
   let dispatch = useDispatch();
 
-  let { isPlaying, isActive, activeSong, songs, currentIndex } = useSelector(
+  let { isPlaying, isActive, activeSong, currentIndex } = useSelector(
     (state) => state.musicPlayer
   );
 
-  const handlePlayPause = (val) => {
-    dispatch(playPause({ isPlaying: val, song: activeSong }));
+  const handlePlayPause = (bollean) => {
+    dispatch(playPause({ isPlaying: bollean, song: activeSong }));
   };
 
   const handleNextSong = () => {
